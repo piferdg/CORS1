@@ -4,6 +4,7 @@ const data = require('./dataSet')
 const port = 8000
 
 const app = express()
+app.use(cors())
 
 function returnCohortId(data, id) {
   for (let i = 0; i < data.length; i++) {
@@ -11,16 +12,16 @@ function returnCohortId(data, id) {
       return data[i]
     }
   }
+  return null
 }
 
 app.get('/', (request, response) => {
-  response.json({data})
+  response.json({ data })
 })
 
 app.get('/:id', (request, response) => {
   let cohort = returnCohortId(data, request.params.id)
-  console.log('PARAMS, maybe?', request.params);
-  
+
   if (!cohort) {
     response.status(404).json({
       error: {
@@ -37,7 +38,4 @@ app.get('/:id', (request, response) => {
 
 app.listen(port, function () {
   console.log('Listening on port', port)
-  
 })
-
-module.exports = app

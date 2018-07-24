@@ -25,9 +25,9 @@ app.get('/:id', (request, response) => {
   if (!cohort) {
     response.status(404).json({
       error: {
-        message: "No cohort found"
+        message: 'No record found!'
       }
-    })
+    })   
   } else {
     response.json({
       data: cohort
@@ -35,6 +35,4 @@ app.get('/:id', (request, response) => {
   }
 })
 
-app.listen(port, function () {
-  console.log('Listening on port', port)
-})
+app.listen(port)
